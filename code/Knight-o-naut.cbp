@@ -36,6 +36,12 @@
 			<Add library="/home/moosader/_Libraries/SFML-2.1-x64/lib/libsfml-system.so" />
 			<Add library="/home/moosader/_Libraries/SFML-2.1-x64/lib/libsfml-window.so" />
 		</Linker>
+		<Unit filename="Borka/Application.cpp" />
+		<Unit filename="Borka/Application.h" />
+		<Unit filename="Borka/Level.cpp" />
+		<Unit filename="Borka/Level.h" />
+		<Unit filename="Borka/Tile.cpp" />
+		<Unit filename="Borka/Tile.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
