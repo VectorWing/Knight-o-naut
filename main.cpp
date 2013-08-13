@@ -7,7 +7,7 @@
 
 int main()
 {
-    Application application( "Knight-o-naut", sf::Vector2i( 640, 480 ) );
+    borka::Application application( "Knight-o-naut", sf::Vector2i( 640, 480 ) );
 
     while ( !application.IsDone() )
     {
