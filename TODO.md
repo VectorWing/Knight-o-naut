@@ -17,3 +17,6 @@
 1. Death system
 1. Cutscenes and Dialog
 1. Saving and Loading
+
+Random other things
+1. Hardware graphics lighting
