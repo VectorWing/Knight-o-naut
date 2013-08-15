@@ -15,6 +15,7 @@ int main()
 	borka::ImageManager mgrImages( "assets_images.txt" );
 
 	Player player( mgrImages.GetTexture( "knight.png" ), sf::FloatRect( 320, 240, 64, 64 ) );
+	player.SetCollisionRegion( sf::FloatRect( 12, 30, 40, 33 ) );
 
 	borka::Level level( mgrImages.GetTexture( "tileset.png" ) );
 

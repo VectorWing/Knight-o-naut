@@ -3,10 +3,12 @@
 #define _CHARACTER
 
 #include "Borka/BaseEntity.h"
+#include "Borka/Tile.h"
 
 class Character : public borka::BaseEntity
 {
 	public:
+	bool IsMapCollision( const std::vector< borka::Tile >& lstTiles, const sf::Vector2f& queueMove );
 
 	protected:
 	float m_speed;
