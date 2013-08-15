@@ -27,6 +27,11 @@ int main()
 			level.Setup( mgrImages.GetTexture( "tileset.png" ) );
 		}
 
+		if ( level.IsCollision( player ) )
+		{
+			player.CorrectMovement();
+		}
+
 		player.HandleMovement();
 
 		application.BeginDraw();

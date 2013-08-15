@@ -8,8 +8,11 @@ class Character : public borka::BaseEntity
 {
 	public:
 	virtual void HandleMovement() = 0;
+	void CorrectMovement();
 
 	protected:
+	float m_speed;
+	sf::Vector2f m_lastMovement;
 };
 
 #endif

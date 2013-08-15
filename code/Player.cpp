@@ -5,25 +5,43 @@
 Player::Player( const sf::Texture& image, const sf::FloatRect& position )
 {
 	Setup( image, position );
+	m_speed = 5;
 }
 
 void Player::HandleMovement()
 {
+	bool moved = false;
+	sf::Vector2f queueMove;
+
 	if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Left ) )
 	{
-		Move( -5, 0 );
+		queueMove.x = -m_speed;
+		moved = true;
 	}
 	else if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Right ) )
 	{
-		Move( 5, 0 );
+		queueMove.x = m_speed;
+		moved = true;
 	}
 
 	if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Up ) )
 	{
-		Move( 0, -5 );
+		queueMove.y = -m_speed;
+		moved = true;
 	}
 	else if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Down ) )
 	{
-		Move( 0, 5 );
+		queueMove.x = m_speed;
+		moved = true;
+	}
+
+	if ( moved )
+	{
+		Move( queueMove );
+		m_lastMovement = queueMove;
+	}
+	else
+	{
+		m_lastMovement = sf::Vector2f( 0, 0 );
 	}
 }
