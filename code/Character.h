@@ -7,6 +7,7 @@
 class Character : public borka::BaseEntity
 {
 	public:
+	virtual void HandleMovement() = 0;
 
 	protected:
 };

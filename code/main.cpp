@@ -6,7 +6,7 @@
 #include "Borka/Application.h"
 #include "Borka/Level.h"
 
-#include "Character.h"
+#include "Player.h"
 
 int main()
 {
@@ -25,7 +25,7 @@ int main()
 		std::cerr << "Error loading knight" << std::endl;
 	}
 
-	Character player;
+	Player player;
 	player.Setup( imgPlayer, sf::FloatRect( 320, 240, 64, 64 ) );
 
 	borka::Level level;
@@ -40,23 +40,7 @@ int main()
 			level.Setup( imgTileset );
 		}
 
-		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Left ) )
-		{
-			player.Move( -5, 0 );
-		}
-		else if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Right ) )
-		{
-			player.Move( 5, 0 );
-		}
-
-		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Up ) )
-		{
-			player.Move( 0, -5 );
-		}
-		else if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Down ) )
-		{
-			player.Move( 0, 5 );
-		}
+		player.HandleMovement();
 
 		application.BeginDraw();
 		level.Draw( application.GetWindow() );
