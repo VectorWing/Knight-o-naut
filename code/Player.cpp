@@ -2,6 +2,11 @@
 
 #include "Player.h"
 
+Player::Player( const sf::Texture& image, const sf::FloatRect& position )
+{
+	Setup( image, position );
+}
+
 void Player::HandleMovement()
 {
 	if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Left ) )

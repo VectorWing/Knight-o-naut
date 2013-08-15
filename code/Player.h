@@ -7,6 +7,7 @@
 class Player : public Character
 {
 	public:
+	Player( const sf::Texture& image, const sf::FloatRect& position );
 	virtual void HandleMovement();
 
 	protected:

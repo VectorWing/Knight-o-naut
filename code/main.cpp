@@ -5,39 +5,26 @@
 
 #include "Borka/Application.h"
 #include "Borka/Level.h"
+#include "Borka/ImageManager.h"
 
 #include "Player.h"
 
 int main()
 {
     borka::Application application( "Knight-o-naut", sf::Vector2i( 1280, 720 ) );
+	borka::ImageManager mgrImages( "assets_images.txt" );
 
-	// Temporary
-	sf::Texture imgTileset;
-	if ( !imgTileset.loadFromFile( "assets/graphics/tileset.png" ) )
-	{
-		std::cerr << "Error loading tileset" << std::endl;
-	}
+	Player player( mgrImages.GetTexture( "knight.png" ), sf::FloatRect( 320, 240, 64, 64 ) );
 
-	sf::Texture imgPlayer;
-	if ( !imgPlayer.loadFromFile( "assets/graphics/knight.png" ) )
-	{
-		std::cerr << "Error loading knight" << std::endl;
-	}
-
-	Player player;
-	player.Setup( imgPlayer, sf::FloatRect( 320, 240, 64, 64 ) );
-
-	borka::Level level;
-	level.Setup( imgTileset );
+	borka::Level level( mgrImages.GetTexture( "tileset.png" ) );
 
     while ( !application.IsDone() )
     {
 		application.Update();
 
-		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Escape ) )
+		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Escape ) )	// Temporary
 		{
-			level.Setup( imgTileset );
+			level.Setup( mgrImages.GetTexture( "tileset.png" ) );
 		}
 
 		player.HandleMovement();
