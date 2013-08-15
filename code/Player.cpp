@@ -6,12 +6,14 @@
 Player::Player( const sf::Texture& image, const sf::FloatRect& position )
 {
 	Setup( image, position );
-	m_speed = 5;
+	m_speed = 4;
 }
 
 void Player::HandleMovement( const std::vector< borka::Tile >& lstTiles )
 {
-	sf::Vector2f queueMove;
+	// TODO: Clean this up. Also set up speed to slow down when moving diagonally.
+
+	sf::Vector2f queueMove( 0, 0 );
 
 	if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Left ) )
 	{
@@ -22,6 +24,12 @@ void Player::HandleMovement( const std::vector< borka::Tile >& lstTiles )
 		queueMove.x = m_speed;
 	}
 
+	if ( !IsMapCollision( lstTiles, queueMove ) )
+	{
+		Move( queueMove );
+	}
+
+	queueMove = sf::Vector2f( 0, 0 );
 	if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Up ) )
 	{
 		queueMove.y = -m_speed;

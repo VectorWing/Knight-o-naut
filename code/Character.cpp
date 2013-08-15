@@ -16,5 +16,15 @@ bool Character::IsMapCollision( const std::vector< borka::Tile >& lstTiles, cons
 			return true;
 		}
 	}
+
+	// Collision with side of screen
+	if ( adjusted.IsCollision( sf::FloatRect( 0, 		0, 		1280, 	64 ) ) ||		// Top
+		 adjusted.IsCollision( sf::FloatRect( 0, 		720-64, 1280, 	64 ) ) ||		// Bottom
+		 adjusted.IsCollision( sf::FloatRect( 0, 		0, 		64, 	720 ) ) ||		// Left
+		 adjusted.IsCollision( sf::FloatRect( 1280-64, 	0, 		64, 	720 ) ) )		// Right
+	{
+		return true;
+	}
+
 	return false;
 }
