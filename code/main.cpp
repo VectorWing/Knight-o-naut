@@ -6,6 +6,8 @@
 #include "Borka/Application.h"
 #include "Borka/Level.h"
 
+#include "Character.h"
+
 int main()
 {
     borka::Application application( "Knight-o-naut", sf::Vector2i( 1280, 720 ) );
@@ -22,9 +24,9 @@ int main()
 	{
 		std::cerr << "Error loading knight" << std::endl;
 	}
-	sf::Sprite player;
-	player.setTexture( imgPlayer );
-	player.setPosition( 320, 240 );
+
+	Character player;
+	player.Setup( imgPlayer, sf::FloatRect( 320, 240, 64, 64 ) );
 
 	borka::Level level;
 	level.Setup( imgTileset );
@@ -40,25 +42,25 @@ int main()
 
 		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Left ) )
 		{
-			player.move( -5, 0 );
+			player.Move( -5, 0 );
 		}
 		else if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Right ) )
 		{
-			player.move( 5, 0 );
+			player.Move( 5, 0 );
 		}
 
 		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Up ) )
 		{
-			player.move( 0, -5 );
+			player.Move( 0, -5 );
 		}
 		else if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Down ) )
 		{
-			player.move( 0, 5 );
+			player.Move( 0, 5 );
 		}
 
 		application.BeginDraw();
 		level.Draw( application.GetWindow() );
-		application.GetWindow().draw( player );
+		player.Draw( application.GetWindow() );
 		application.EndDraw();
     }
 
