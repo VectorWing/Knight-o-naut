@@ -7,8 +7,6 @@
 class Character : public borka::BaseEntity
 {
 	public:
-	virtual void HandleMovement() = 0;
-	void CorrectMovement();
 
 	protected:
 	float m_speed;

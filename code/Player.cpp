@@ -1,4 +1,5 @@
 /* Knight-o-naut - Rachel J. Morris - 2013 - License pending - Moosader.com */
+#include <iostream>
 
 #include "Player.h"
 
@@ -8,7 +9,7 @@ Player::Player( const sf::Texture& image, const sf::FloatRect& position )
 	m_speed = 5;
 }
 
-void Player::HandleMovement()
+void Player::HandleMovement( const std::vector< borka::Tile >& lstTiles )
 {
 	bool moved = false;
 	sf::Vector2f queueMove;
@@ -31,17 +32,24 @@ void Player::HandleMovement()
 	}
 	else if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Down ) )
 	{
-		queueMove.x = m_speed;
+		queueMove.y = m_speed;
 		moved = true;
+	}
+
+	sf::FloatRect adjustedPosition = m_position;
+	adjustedPosition.left += queueMove.x;
+	adjustedPosition.top += queueMove.y;
+
+	for ( unsigned int i = 0; i < lstTiles.size(); i++ )
+	{
+		if ( lstTiles[i].IsSolid() && lstTiles[i].IsCollision( adjustedPosition ) )
+		{
+			moved = false;
+		}
 	}
 
 	if ( moved )
 	{
 		Move( queueMove );
-		m_lastMovement = queueMove;
-	}
-	else
-	{
-		m_lastMovement = sf::Vector2f( 0, 0 );
 	}
 }
