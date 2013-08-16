@@ -12,10 +12,13 @@ class Player : public Character
 	virtual void HandleMovement( const std::vector< borka::Tile >& lstTiles );
 	Behavior GetHorseCommand();
 
+	void Update();
+
 	sf::Vector2f GetLastMove();
 
 	protected:
-	sf::Vector2f m_lastMove;
+	sf::Vector2f 	m_lastMove;
+	float 			m_commandTimeout;
 };
 
 #endif

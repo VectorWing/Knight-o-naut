@@ -8,6 +8,15 @@ Player::Player( const sf::Texture& image, const sf::FloatRect& position )
 {
 	m_speed = 4;
 	m_lastMove.x = m_lastMove.y = 0;
+	m_commandTimeout = 0;
+}
+
+void Player::Update()
+{
+	if ( m_commandTimeout > 0 )
+	{
+		m_commandTimeout -= 1.0f;
+	}
 }
 
 void Player::HandleMovement( const std::vector< borka::Tile >& lstTiles )
@@ -56,16 +65,18 @@ sf::Vector2f Player::GetLastMove()
 
 Behavior Player::GetHorseCommand()
 {
-	if ( sf::Keyboard::isKeyPressed( sf::Keyboard::S ) )
+	if ( m_commandTimeout <= 0 )
 	{
-		return SIT;
+		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::S ) )
+		{
+			m_commandTimeout = 100.0f;
+			return SIT;
+		}
+		else if ( sf::Keyboard::isKeyPressed( sf::Keyboard::F ) )
+		{
+			m_commandTimeout = 100.0f;
+			return FOLLOW_PLAYER;
+		}
 	}
-	else if ( sf::Keyboard::isKeyPressed( sf::Keyboard::F ) )
-	{
-		return FOLLOW_PLAYER;
-	}
-	else
-	{
-		return NONE;
-	}
+	return NONE;
 }
