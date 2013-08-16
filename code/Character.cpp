@@ -2,6 +2,12 @@
 #include "Character.h"
 #include <iostream>
 
+Character::Character( const sf::Texture& image, const sf::FloatRect& position )
+{
+	Setup( image, position );
+	m_speed = 2;
+}
+
 bool Character::IsMapCollision( const std::vector< borka::Tile >& lstTiles, const sf::Vector2f& queueMove )
 {
 	borka::BaseEntity adjusted;
@@ -27,4 +33,52 @@ bool Character::IsMapCollision( const std::vector< borka::Tile >& lstTiles, cons
 	}
 
 	return false;
+}
+
+void Character::HandleMovement( const std::vector< borka::Tile >& lstTiles )
+{
+	// TODO: Clean this up. Also set up speed to slow down when moving diagonally.
+	sf::Vector2f queueMove( 0, 0 );
+
+	if ( m_behavior == FOLLOW_PLAYER )
+	{
+		if ( m_goal.x < m_position.left )
+		{
+			queueMove.x = -m_speed;
+		}
+		else if ( m_goal.x > m_position.left )
+		{
+			queueMove.x = m_speed;
+		}
+
+		if ( m_goal.y < m_position.top )
+		{
+			queueMove.y = -m_speed;
+		}
+		else if ( m_goal.y > m_position.top )
+		{
+			queueMove.y = m_speed;
+		}
+
+		if ( !IsMapCollision( lstTiles, queueMove ) )
+		{
+			Move( queueMove );
+		}
+	}
+}
+
+void Character::SetBehavior( Behavior behavior )
+{
+	m_behavior = ( behavior == NONE ) ? m_behavior : behavior;
+}
+
+void Character::SetBehavior( Behavior behavior, const sf::Vector2f goal )
+{
+	m_goal = goal;
+	SetBehavior( behavior );
+}
+
+void Character::SetSpeed( float speed )
+{
+	m_speed = speed;
 }

@@ -38,10 +38,18 @@
 		</Linker>
 		<Unit filename="Borka/Application.cpp" />
 		<Unit filename="Borka/Application.h" />
+		<Unit filename="Borka/BaseEntity.cpp" />
+		<Unit filename="Borka/BaseEntity.h" />
+		<Unit filename="Borka/ImageManager.cpp" />
+		<Unit filename="Borka/ImageManager.h" />
 		<Unit filename="Borka/Level.cpp" />
 		<Unit filename="Borka/Level.h" />
 		<Unit filename="Borka/Tile.cpp" />
 		<Unit filename="Borka/Tile.h" />
+		<Unit filename="Character.cpp" />
+		<Unit filename="Character.h" />
+		<Unit filename="Player.cpp" />
+		<Unit filename="Player.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

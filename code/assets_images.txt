@@ -1,3 +1,5 @@
 assets/graphics/
 knight.png
 tileset.png
+horse.png
+effects.png

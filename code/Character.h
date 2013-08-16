@@ -5,14 +5,25 @@
 #include "Borka/BaseEntity.h"
 #include "Borka/Tile.h"
 
+enum Behavior { NONE, SIT, FOLLOW_PLAYER };
+
 class Character : public borka::BaseEntity
 {
 	public:
+	Character( const sf::Texture& image, const sf::FloatRect& position );
+
 	bool IsMapCollision( const std::vector< borka::Tile >& lstTiles, const sf::Vector2f& queueMove );
+	virtual void HandleMovement( const std::vector< borka::Tile >& lstTiles );
+
+	void SetBehavior( Behavior behavior );
+	void SetBehavior( Behavior behavior, const sf::Vector2f goal );
+	void SetSpeed( float speed );
 
 	protected:
-	float m_speed;
-	sf::Vector2f m_lastMovement;
+	float 			m_speed;
+	sf::Vector2f 	m_lastMovement;
+	sf::Vector2f 	m_goal;
+	Behavior 		m_behavior;
 };
 
 #endif

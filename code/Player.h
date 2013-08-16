@@ -10,8 +10,12 @@ class Player : public Character
 	public:
 	Player( const sf::Texture& image, const sf::FloatRect& position );
 	virtual void HandleMovement( const std::vector< borka::Tile >& lstTiles );
+	Behavior GetHorseCommand();
+
+	sf::Vector2f GetLastMove();
 
 	protected:
+	sf::Vector2f m_lastMove;
 };
 
 #endif
