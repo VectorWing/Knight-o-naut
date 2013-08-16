@@ -40,7 +40,7 @@ void Character::HandleMovement( const std::vector< borka::Tile >& lstTiles )
 	// TODO: Clean this up. Also set up speed to slow down when moving diagonally.
 	sf::Vector2f queueMove( 0, 0 );
 
-	if ( m_behavior == FOLLOW_PLAYER )
+	if ( m_behavior == GOAL )
 	{
 		if ( m_goal.x < m_position.left )
 		{
@@ -81,4 +81,23 @@ void Character::SetBehavior( Behavior behavior, const sf::Vector2f goal )
 void Character::SetSpeed( float speed )
 {
 	m_speed = speed;
+}
+
+void Character::Draw( sf::RenderWindow& window )
+{
+	// Draw goal
+	// TODO: This is bad because it will draw over other characters
+	// and any enemies with a "goal" will have this display too.
+	if ( m_behavior == GOAL )
+	{
+		sf::CircleShape circle;
+		circle.setFillColor( sf::Color( 100, 200, 50, 200 ) );
+		circle.setPosition( sf::Vector2f( m_goal.x - 10 + 32, m_goal.y - 10 + 32 ) );
+		circle.setRadius( 20 );
+		circle.setOutlineColor( sf::Color( 0, 0, 0 ) );
+		circle.setOutlineThickness( 3 );
+		window.draw( circle );
+	}
+
+	BaseEntity::Draw( window );
 }

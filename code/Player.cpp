@@ -75,7 +75,7 @@ Behavior Player::GetHorseCommand()
 		else if ( sf::Keyboard::isKeyPressed( sf::Keyboard::F ) )
 		{
 			m_commandTimeout = 100.0f;
-			return FOLLOW_PLAYER;
+			return GOAL;
 		}
 	}
 	return NONE;

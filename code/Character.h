@@ -5,7 +5,7 @@
 #include "Borka/BaseEntity.h"
 #include "Borka/Tile.h"
 
-enum Behavior { NONE, SIT, FOLLOW_PLAYER };
+enum Behavior { NONE, SIT, GOAL, FOLLOW_PLAYER };
 
 class Character : public borka::BaseEntity
 {
@@ -18,6 +18,8 @@ class Character : public borka::BaseEntity
 	void SetBehavior( Behavior behavior );
 	void SetBehavior( Behavior behavior, const sf::Vector2f goal );
 	void SetSpeed( float speed );
+
+    virtual void Draw( sf::RenderWindow& window );
 
 	protected:
 	float 			m_speed;
