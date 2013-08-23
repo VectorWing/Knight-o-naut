@@ -1,5 +1,7 @@
 assets/graphics/
 knight.png
-tileset.png
 horse.png
 effects.png
+DesertTileset.png
+MedievalTileset.png
+Shop1.png

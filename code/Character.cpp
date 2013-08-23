@@ -64,6 +64,13 @@ void Character::HandleMovement( const std::vector< borka::Tile >& lstTiles )
 		{
 			Move( queueMove );
 		}
+
+		// Note: This might not happen due to floating points.
+		// Add a "range".
+		if ( m_position.left == m_goal.x && m_position.top == m_goal.y )
+		{
+			m_behavior = NONE;
+		}
 	}
 }
 

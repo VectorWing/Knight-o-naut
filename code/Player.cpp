@@ -69,12 +69,12 @@ Behavior Player::GetHorseCommand()
 	{
 		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::S ) )
 		{
-			m_commandTimeout = 100.0f;
+			m_commandTimeout = 10.0f;
 			return SIT;
 		}
 		else if ( sf::Keyboard::isKeyPressed( sf::Keyboard::F ) )
 		{
-			m_commandTimeout = 100.0f;
+			m_commandTimeout = 50.0f;
 			return GOAL;
 		}
 	}

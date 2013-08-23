@@ -6,6 +6,7 @@
 #include "Borka/Application.h"
 #include "Borka/Level.h"
 #include "Borka/ImageManager.h"
+#include "Borka/SoundManager.h"
 #include "Borka/EffectManager.h"
 
 #include "Player.h"
@@ -17,6 +18,7 @@ int main()
 	// Temporary - will clean up
     borka::Application application( "Knight-o-naut", sf::Vector2i( 1280, 720 ) );
 	borka::ImageManager mgrImages( "assets_images.txt" );
+	borka::SoundManager mgrAudio( "assets_audio.txt" );
 	borka::EffectManager mgrEffects;
 
 	Character horse( mgrImages.GetTexture( "horse.png" ), sf::FloatRect( 320, 240-64, 64, 64 ) );
@@ -25,7 +27,16 @@ int main()
 	Player player( mgrImages.GetTexture( "knight.png" ), sf::FloatRect( 320, 240, 64, 64 ) );
 	player.SetCollisionRegion( sf::FloatRect( 12, 30, 40, 33 ) );
 
-	borka::Level level( mgrImages.GetTexture( "tileset.png" ) );
+	borka::Level level( mgrImages.GetTexture( "DesertTileset.png" ) );
+
+	sf::Sound whistle;
+	whistle.setBuffer( mgrAudio.GetSound( "whistle.ogg" ) );
+	whistle.setVolume( 25 );
+
+	sf::Sound music;
+	music.setBuffer( mgrAudio.GetSound( "AfterTheRain_Moosader.ogg" ) );
+	music.setLoop( true );
+	music.play();
 
     while ( !application.IsDone() )
     {
@@ -41,11 +52,13 @@ int main()
 			mgrEffects.AddEffect( mgrImages.GetTexture( "effects.png" ), sf::Vector2f( player.CenterX(), 	player.Top() ), borka::UP );
 			mgrEffects.AddEffect( mgrImages.GetTexture( "effects.png" ), sf::Vector2f( player.CenterX() + 16, player.Top() ), borka::UP );
 			horse.SetBehavior( command, sf::Vector2f( player.GetPosition().left, player.GetPosition().top ) );
+			whistle.setPitch( float(rand() % 150 + 50) / 100 );
+			whistle.play();
 		}
 
 		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Escape ) )	// Temporary
 		{
-			level.Setup( mgrImages.GetTexture( "tileset.png" ) );
+			level.Setup( mgrImages.GetTexture( "DesertTileset.png" ) );
 		}
 
 		player.HandleMovement( level.GetTiles() );
