@@ -33,11 +33,11 @@ void Player::HandleMovement( const std::vector< borka::Tile >& lstTiles )
 	sf::Vector2f queueMove( 0, 0 );
 	m_lastMove.x = m_lastMove.y = 0;
 
-	if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Left ) )
+	if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Left ) || sf::Keyboard::isKeyPressed( sf::Keyboard::A ) )
 	{
 		queueMove.x = -m_speed;
 	}
-	else if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Right ) )
+	else if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Right ) || sf::Keyboard::isKeyPressed( sf::Keyboard::D ) )
 	{
 		queueMove.x = m_speed;
 	}
@@ -49,11 +49,11 @@ void Player::HandleMovement( const std::vector< borka::Tile >& lstTiles )
 	}
 
 	queueMove = sf::Vector2f( 0, 0 );
-	if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Up ) )
+	if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Up ) || sf::Keyboard::isKeyPressed( sf::Keyboard::W ) )
 	{
 		queueMove.y = -m_speed;
 	}
-	else if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Down ) )
+	else if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Down ) || sf::Keyboard::isKeyPressed( sf::Keyboard::S ) )
 	{
 		queueMove.y = m_speed;
 	}
@@ -74,12 +74,12 @@ Behavior Player::GetHorseCommand()
 {
 	if ( m_commandTimeout <= 0 )
 	{
-		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::S ) )
+		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Q ) )
 		{
 			m_commandTimeout = 10.0f;
 			return SIT;
 		}
-		else if ( sf::Keyboard::isKeyPressed( sf::Keyboard::F ) )
+		else if ( sf::Keyboard::isKeyPressed( sf::Keyboard::E ) )
 		{
 			m_commandTimeout = 50.0f;
 			return GOAL;

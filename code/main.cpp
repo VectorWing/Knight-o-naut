@@ -7,8 +7,7 @@
 
 #include "Player.h"
 #include "DungeonState.h"
-
-// Note: Clean up entity stuff... composition instead of inheritance.
+#include "HubState.h"
 
 int main()
 {
@@ -22,12 +21,12 @@ int main()
     borka::EffectManager 	mgrEffects;
 
 	borka::StateManager mgrStates;
-	DungeonState dungeonState;
-	dungeonState.Link( &application, &mgrImages, &mgrAudio, &mgrEffects );
+	DungeonState dungeonState( &application, &mgrImages, &mgrAudio, &mgrEffects );
+	HubState hubState( &application, &mgrImages, &mgrAudio, &mgrEffects );
 
-	mgrStates.AddState( "dungeon", &dungeonState );
-	mgrStates.SetCurrentState( "dungeon" );
-	mgrStates.Setup();
+	mgrStates.AddState( "dungeon", 	&dungeonState );
+	mgrStates.AddState( "hub", 		&hubState );
+	mgrStates.SetCurrentState( "hub" );
 
 	while ( !application.IsDone() )
     {

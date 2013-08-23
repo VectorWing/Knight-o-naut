@@ -4,6 +4,7 @@
 
 #include "Borka/Entities/BaseEntity.h"
 #include "Borka/Levels/Tile.h"
+#include "Borka/Levels/Level.h"
 
 enum Behavior { NONE, SIT, GOAL, FOLLOW_PLAYER };
 
@@ -14,6 +15,8 @@ class Character : public borka::BaseEntity
 	Character( const sf::Texture& image, const sf::FloatRect& position );
 
 	void Setup( const sf::Texture& image, const sf::FloatRect& position );
+	void RandomCoordinates();
+	void PlaceNear( const Character& item, borka::Level& level );
 
 	bool IsMapCollision( const std::vector< borka::Tile >& lstTiles, const sf::Vector2f& queueMove );
 	virtual void HandleMovement( const std::vector< borka::Tile >& lstTiles );

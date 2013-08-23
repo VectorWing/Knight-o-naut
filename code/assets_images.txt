@@ -5,3 +5,4 @@ effects.png
 DesertTileset.png
 MedievalTileset.png
 Shop1.png
+Ship.png

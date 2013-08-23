@@ -15,6 +15,38 @@ void Character::Setup( const sf::Texture& image, const sf::FloatRect& position )
 	m_speed = 2;
 }
 
+void Character::RandomCoordinates()
+{
+	int x = rand() % 1280 - 128 + 64;
+	int y = rand() % 720 - 128 + 64;
+	m_position.left = x;
+	m_position.top = y;
+	UpdateSpritePosition();
+}
+
+void Character::PlaceNear( const Character& item, borka::Level& level )
+{
+	int counter = 0;
+	while ( counter < 10 )
+	{
+		m_position.left = (rand() % 192) - 96 + item.GetPosition().left;
+		m_position.top = (rand() % 192) - 96 + item.GetPosition().top;
+
+		if ( !level.IsCollision( *this ) )
+		{
+			break;
+		}
+		counter++;
+	}
+
+	// Oh well, put it in a random place.
+	while ( level.IsCollision( *this ) )
+	{
+		RandomCoordinates();
+	}
+	UpdateSpritePosition();
+}
+
 bool Character::IsMapCollision( const std::vector< borka::Tile >& lstTiles, const sf::Vector2f& queueMove )
 {
 	borka::BaseEntity adjusted;

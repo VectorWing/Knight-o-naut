@@ -2,6 +2,15 @@
 
 #include <iostream>
 
+
+DungeonState::DungeonState( borka::Application* ptrApp,
+	borka::ImageManager* ptrImage,
+	borka::SoundManager* ptrSound,
+	borka::EffectManager* ptrEffect )
+	: State( ptrApp, ptrImage, ptrSound, ptrEffect )
+{
+}
+
 void DungeonState::Setup()
 {
 	horse.Setup( m_ptrImageManager->GetTexture( "horse.png" ), sf::FloatRect( 320, 240-64, 64, 64 ) );
@@ -12,8 +21,23 @@ void DungeonState::Setup()
 
 	level.Setup( m_ptrImageManager->GetTexture( "DesertTileset.png" ) );
 
+	// Generate new coordinates while you're colliding with stuff.
+	while ( level.IsCollision( player ) )
+	{
+		player.RandomCoordinates();
+	}
+
+	while ( level.IsCollision( horse ) )
+	{
+		horse.RandomCoordinates();
+	}
+
 	whistle.setBuffer( m_ptrSoundManager->GetSound( "whistle.ogg" ) );
 	whistle.setVolume( 25 );
+
+	footsteps.setBuffer( m_ptrSoundManager->GetSound( "Footsteps.ogg" ) );
+	footsteps.setVolume( 25 );
+	footsteps.play();
 
 	music.setBuffer( m_ptrSoundManager->GetSound( "AfterTheRain_Moosader.ogg" ) );
 	music.setLoop( true );
@@ -43,13 +67,24 @@ void DungeonState::Main()
 			whistle.play();
 		}
 
-		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Escape ) )	// Temporary
+		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Escape ) )	// Back to HUB
 		{
-			level.Setup( m_ptrImageManager->GetTexture( "DesertTileset.png" ) );
+			m_nextState = "hub";
+			m_isDone = true;
+			music.stop();
 		}
 
 		player.HandleMovement( level.GetTiles() );
 		horse.HandleMovement( level.GetTiles() );
+
+		if ( level.IsTeleport( player ) )
+		{
+			// Teleport!
+//			m_nextState = "dungeon";
+//			m_isDone = true;
+			music.stop();
+			Setup();
+		}
 
 		m_ptrApplication->BeginDraw();
 		level.Draw( m_ptrApplication->GetWindow() );
