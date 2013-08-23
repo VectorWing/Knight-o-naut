@@ -8,7 +8,11 @@
 class Player : public Character
 {
 	public:
+	Player();
 	Player( const sf::Texture& image, const sf::FloatRect& position );
+
+	void Setup( const sf::Texture& image, const sf::FloatRect& position );
+
 	virtual void HandleMovement( const std::vector< borka::Tile >& lstTiles );
 	Behavior GetHorseCommand();
 

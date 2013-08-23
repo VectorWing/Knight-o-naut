@@ -10,7 +10,10 @@ enum Behavior { NONE, SIT, GOAL, FOLLOW_PLAYER };
 class Character : public borka::BaseEntity
 {
 	public:
+	Character();
 	Character( const sf::Texture& image, const sf::FloatRect& position );
+
+	void Setup( const sf::Texture& image, const sf::FloatRect& position );
 
 	bool IsMapCollision( const std::vector< borka::Tile >& lstTiles, const sf::Vector2f& queueMove );
 	virtual void HandleMovement( const std::vector< borka::Tile >& lstTiles );

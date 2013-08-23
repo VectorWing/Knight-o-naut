@@ -3,9 +3,16 @@
 
 #include "Player.h"
 
+Player::Player() { ; }
+
 Player::Player( const sf::Texture& image, const sf::FloatRect& position )
-	: Character( image, position )
 {
+	Setup( image, position );
+}
+
+void Player::Setup( const sf::Texture& image, const sf::FloatRect& position )
+{
+	Character::Setup( image, position );
 	m_speed = 4;
 	m_lastMove.x = m_lastMove.y = 0;
 	m_commandTimeout = 0;

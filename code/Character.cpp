@@ -2,9 +2,16 @@
 #include "Character.h"
 #include <iostream>
 
-Character::Character( const sf::Texture& image, const sf::FloatRect& position )
+Character::Character() { ; }
+
+Character::Character( const sf::Texture& image, const sf::FloatRect& position  )
 {
 	Setup( image, position );
+}
+
+void Character::Setup( const sf::Texture& image, const sf::FloatRect& position )
+{
+	BaseEntity::Setup( image, position );
 	m_speed = 2;
 }
 
