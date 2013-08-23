@@ -2,8 +2,8 @@
 #ifndef _CHARACTER
 #define _CHARACTER
 
-#include "Borka/BaseEntity.h"
-#include "Borka/Tile.h"
+#include "Borka/Entities/BaseEntity.h"
+#include "Borka/Levels/Tile.h"
 
 enum Behavior { NONE, SIT, GOAL, FOLLOW_PLAYER };
 

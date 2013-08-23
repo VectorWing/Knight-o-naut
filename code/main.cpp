@@ -3,11 +3,11 @@
 
 #include <SFML/Window.hpp>
 
-#include "Borka/Application.h"
-#include "Borka/Level.h"
-#include "Borka/ImageManager.h"
-#include "Borka/SoundManager.h"
-#include "Borka/EffectManager.h"
+#include "Borka/Base/Application.h"
+#include "Borka/Levels/Level.h"
+#include "Borka/Graphics/ImageManager.h"
+#include "Borka/Audio/SoundManager.h"
+#include "Borka/Graphics/EffectManager.h"
 
 #include "Player.h"
 

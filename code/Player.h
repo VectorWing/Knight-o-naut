@@ -3,7 +3,7 @@
 #define _PLAYER
 
 #include "Character.h"
-#include "Borka/Tile.h"
+#include "Borka/Levels/Tile.h"
 
 class Player : public Character
 {
